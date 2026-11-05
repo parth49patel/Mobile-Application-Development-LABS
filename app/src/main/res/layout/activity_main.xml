@@ -12,7 +12,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header showing the app name -->
         <TextView
             android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
@@ -24,28 +23,24 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Search box with hint -->
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
+            android:background="#ECEFF1"
             app:iconifiedByDefault="false"
             app:queryHint="Search tasks..." />
 
-        <!-- Placeholder / Empty State -->
-        <TextView
+        <!-- List showing saved coloured tasks -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTasks"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="No Tasks Yet"
-            android:textColor="#757575"
-            android:textSize="16sp" />
+            android:layout_marginTop="12dp" />
 
     </LinearLayout>
 
-    <!-- Add Task Icon (FAB) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddTask"
         android:layout_width="wrap_content"
