@@ -7,14 +7,13 @@
     android:fillViewport="true"
     android:background="#FFFFFF">
 
-    <!-- Main Vertical Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Top Bar with Back Button -->
+        <!-- Top Bar with Back Button and Dynamic Title -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,6 +30,7 @@
                 android:src="@android:drawable/ic_menu_revert" />
 
             <TextView
+                android:id="@+id/tvScreenTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Task"
@@ -78,7 +78,7 @@
             android:textColor="#616161"
             android:layout_marginBottom="8dp" />
 
-        <!-- Horizontal Row of Color Squares -->
+        <!-- Color Squares -->
         <LinearLayout
             android:id="@+id/layoutColorSquares"
             android:layout_width="match_parent"
@@ -86,7 +86,6 @@
             android:orientation="horizontal"
             android:layout_marginBottom="16dp">
 
-            <!-- Yellow Square -->
             <View
                 android:id="@+id/colorYellow"
                 android:layout_width="40dp"
@@ -94,7 +93,6 @@
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/square_border" />
 
-            <!-- Orange Square -->
             <View
                 android:id="@+id/colorOrange"
                 android:layout_width="40dp"
@@ -102,7 +100,6 @@
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/square_border" />
 
-            <!-- Blue Square -->
             <View
                 android:id="@+id/colorBlue"
                 android:layout_width="40dp"
@@ -110,7 +107,6 @@
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/square_border" />
 
-            <!-- Green Square -->
             <View
                 android:id="@+id/colorGreen"
                 android:layout_width="40dp"
@@ -118,20 +114,19 @@
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/square_border" />
 
-            <!-- Purple Square -->
             <View
                 android:id="@+id/colorPurple"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/square_border" />
-
         </LinearLayout>
 
         <!-- Description Area -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDescription"
@@ -140,16 +135,76 @@
                 android:gravity="top|start"
                 android:hint="Description"
                 android:inputType="textMultiLine"
-                android:minLines="5" />
+                android:minLines="4" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Done Button -->
+        <!-- Image Buttons (Gallery & Camera) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="Upload Image" />
+
+            <Button
+                android:id="@+id/btnCapturePhoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="Capture Photo" />
+        </LinearLayout>
+
+        <!-- Image Preview & Remove Button -->
+        <FrameLayout
+            android:id="@+id/layoutImagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivTaskImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <ImageButton
+                android:id="@+id/btnRemoveImage"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:background="#80000000"
+                android:tint="#FFFFFF"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+        </FrameLayout>
+
+        <!-- Save / Done Button -->
         <Button
             android:id="@+id/btnDone"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Done"
             android:textSize="16sp" />
+
+        <!-- Optional In-Screen Delete Button (Visible only in Edit mode) -->
+        <Button
+            android:id="@+id/btnDeleteTaskScreen"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#D32F2F"
+            android:text="Delete Task"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
 
     </LinearLayout>
 </ScrollView>

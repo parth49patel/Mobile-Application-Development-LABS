@@ -16,13 +16,30 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvItemTitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#212121" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvItemTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#212121" />
+
+            <!-- Delete Trash Icon -->
+            <ImageButton
+                android:id="@+id/btnDeleteTask"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Delete"
+                android:src="@android:drawable/ic_menu_delete" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvItemDeadline"
@@ -39,6 +56,7 @@
             android:layout_marginTop="6dp"
             android:textSize="14sp"
             android:textColor="#333333" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
