@@ -2,6 +2,7 @@ package com.example.simpletask
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,22 @@ class MainActivity : AppCompatActivity() {
 
         val rvTasks = findViewById<RecyclerView>(R.id.rvTasks)
         rvTasks.layoutManager = LinearLayoutManager(this)
-        taskAdapter = TaskAdapter(emptyList())
+
+        taskAdapter = TaskAdapter(
+            tasks = emptyList(),
+            onTaskClick = { task ->
+                // Pass task ID to reuse NewTaskActivity as an Edit screen
+                val intent = Intent(this, NewTaskActivity::class.java).apply {
+                    putExtra("TASK_ID", task.id)
+                }
+                startActivity(intent)
+            },
+            onTaskDelete = { task ->
+                taskDao.deleteTask(task.id)
+                Toast.makeText(this, "Task deleted", Toast.LENGTH_SHORT).show()
+                loadTasks()
+            }
+        )
         rvTasks.adapter = taskAdapter
 
         val fabAddTask = findViewById<FloatingActionButton>(R.id.fabAddTask)
@@ -46,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Reload list immediately when coming back from NewTaskActivity
         loadTasks()
     }
 

@@ -8,7 +8,7 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
 
     companion object {
         private const val DATABASE_NAME = "simple_task.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2 // Raised version for Lab 4
 
         const val TABLE_TASKS = "tasks"
         const val COLUMN_ID = "id"
@@ -17,6 +17,7 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         const val COLUMN_DESCRIPTION = "description"
         const val COLUMN_COLOUR = "colour"
         const val COLUMN_CREATED_UTC = "created_utc"
+        const val COLUMN_IMG = "img" // New image column
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -34,7 +35,8 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_TASKS")
-        onCreate(db)
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE $TABLE_TASKS ADD COLUMN $COLUMN_IMG TEXT")
+        }
     }
 }
